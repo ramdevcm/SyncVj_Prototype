@@ -7,7 +7,7 @@ public class DBsync {
 
     public static final String DATABASE_NAME = "vjinfo";
     public static final String DEPARTMENT = "DEPARTMRNT";
-    public static final String SERVER_URL_SYNC = "http://syncvj-com.stackstaging.com/sync_staffdetails.php";
+    public static final String SERVER_URL_SYNC = "http://syncvj-com.stackstaging.com/sync.php";
     public static final String SERVER_URL_ISACTIVE = "http://syncvj-com.stackstaging.com/isactive.php";
     public static final String SERVER_URL_DEL = "http://syncvj-com.stackstaging.com/delete_staffdetails.php";
     public static final String SERVER_URL_GET = "http://syncvj-com.stackstaging.com/getAll_staffdetails.php";
