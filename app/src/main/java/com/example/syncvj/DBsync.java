@@ -6,14 +6,28 @@ public class DBsync {
     public static final int SYNC_STATUS_FAILED =1;
 
     public static final String DATABASE_NAME = "vjinfo";
-    public static final String DEPARTMENT = "DEPARTMRNT";
+
+    //Adding new staff into database
     public static final String SERVER_URL_SYNC = "http://syncvj-com.stackstaging.com/sync_staffdetails.php";
+
+    //Checking if database is active/reachable
     public static final String SERVER_URL_ISACTIVE = "http://syncvj-com.stackstaging.com/isactive.php";
+
+    //Delete the entire table contents of staff details
     public static final String SERVER_URL_DEL = "http://syncvj-com.stackstaging.com/delete_staffdetails.php";
+
+    //Sync the local and online database
     public static final String SERVER_URL_GET = "http://syncvj-com.stackstaging.com/getAll.php";
+
+    //Delete a contact information from the database
     public static final String SERVER_URL_DELONE = "http://syncvj-com.stackstaging.com/delone_staffdetails.php";
+
+    //Update the contact information of a staff
     public static final String SERVER_URL_UPDATEONE = "http://syncvj-com.stackstaging.com/updateone_staffdetails.php";
+
+    //Table attributes
     public static final String TABLE_NAME = "csstaffdetails";
+    public static final String DEPARTMENT = "DEPARTMRNT";
     public static final String NAME = "NAME";
     public static final String POST = "POST";
     public static final String NUMBER = "NUMBER";
