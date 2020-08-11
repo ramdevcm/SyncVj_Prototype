@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        app:srcCompat="@drawable/rectvectorvjec1" />
+        app:srcCompat="@drawable/rectvectorvjec1"
+        android:contentDescription="@string/todo" />
 
     <Button
         android:id="@+id/vjecDeptButton"
@@ -33,7 +34,7 @@
         android:background="@drawable/mybutton"
         android:fontFamily="@font/montserrat"
         android:gravity="center|center_horizontal"
-        android:text="DEPARTMENTS"
+        android:text="@string/departments"
         android:textAlignment="center"
         android:textColor="#1B2B49"
         android:textSize="20sp"
@@ -56,7 +57,7 @@
 
         android:fontFamily="@font/montserrat"
         android:gravity="center|center_horizontal"
-        android:text="ADMINISTRATION"
+        android:text="@string/administration"
         android:textAlignment="center"
         android:textColor="#1B2B49"
         android:textSize="20sp"
@@ -79,7 +80,7 @@
 
         android:fontFamily="@font/montserrat"
         android:gravity="center|center_horizontal"
-        android:text="INTERCOM"
+        android:text="@string/intercom"
         android:textAlignment="center"
         android:textColor="#1B2B49"
         android:textSize="20sp"
@@ -102,7 +103,7 @@
 
         android:fontFamily="@font/montserrat"
         android:gravity="center|center_horizontal"
-        android:text="GENERAL FACILITIES"
+        android:text="@string/general_facilities"
         android:textAlignment="center"
         android:textColor="#1B2B49"
         android:textSize="18sp"
@@ -125,7 +126,7 @@
         android:background="@drawable/mybutton"
         android:fontFamily="@font/montserrat"
         android:gravity="center|center_horizontal"
-        android:text="USEFUL LINKS"
+        android:text="@string/useful_links"
         android:textAlignment="center"
         android:textColor="#1B2B49"
         android:textSize="18sp"

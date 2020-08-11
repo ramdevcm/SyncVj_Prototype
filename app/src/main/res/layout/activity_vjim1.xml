@@ -23,7 +23,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:contentDescription="@string/todo" />
 
     <Button
         android:id="@+id/vjim_staff"
@@ -40,7 +41,7 @@
         android:background="@drawable/mybutton"
         android:fontFamily="@font/montserrat"
         android:gravity="center|center_horizontal"
-        android:text="STAFF"
+        android:text="@string/staff"
         android:textAlignment="center"
         android:textColor="#1B2B49"
         android:textSize="20sp"
@@ -64,7 +65,7 @@
         android:background="@drawable/mybutton"
         android:fontFamily="@font/montserrat"
         android:gravity="center|center_horizontal"
-        android:text="INTERCOM"
+        android:text="@string/intercom"
         android:textAlignment="center"
         android:textColor="#1B2B49"
         android:textSize="20sp"
