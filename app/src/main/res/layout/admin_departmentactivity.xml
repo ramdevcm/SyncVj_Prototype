@@ -48,7 +48,7 @@
         android:autofillHints=""
         android:fontFamily="@font/montserrat"
         android:hint="@string/number"
-        android:inputType="number"
+        android:inputType="phone"
         android:textSize="20sp" />
 
     <EditText

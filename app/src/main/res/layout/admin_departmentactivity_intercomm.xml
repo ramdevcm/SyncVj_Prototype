@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:hint="@string/intercom_number"
-        android:inputType="number" />
+        android:inputType="phone" />
 
     <EditText
         android:id="@+id/textView4_intercomm"
