@@ -38,24 +38,26 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:src="@drawable/rectvector"
+                android:contentDescription=""
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/rectvector"
                 tools:ignore="MissingConstraints" />
 
 
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/vjlogo"
+                android:contentDescription=""
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.916"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView"
                 app:layout_constraintVertical_bias="0.578"
+                app:srcCompat="@drawable/vjlogo"
                 tools:ignore="MissingConstraints" />
 
             <Button
@@ -64,6 +66,7 @@
                 android:layout_height="70dp"
                 android:layout_alignParentTop="true"
                 android:background="@drawable/mybutton"
+                android:contentDescription=""
                 android:fontFamily="@font/montserrat"
                 android:gravity="center|center_horizontal"
                 android:text="VJEC"
@@ -85,6 +88,7 @@
                 android:layout_height="70dp"
                 android:layout_alignParentTop="true"
                 android:background="@drawable/mybutton"
+                android:contentDescription=""
                 android:fontFamily="@font/montserrat"
                 android:gravity="center|center_horizontal"
                 android:text="VJIM"
@@ -109,12 +113,33 @@
                 android:layout_marginEnd="54dp"
                 android:layout_marginRight="54dp"
                 android:layout_marginBottom="1dp"
+                android:contentDescription=""
                 android:text="Sync"
                 app:layout_constraintBottom_toTopOf="@+id/imageView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="301dp"
+                android:layout_marginLeft="301dp"
+                android:layout_marginTop="56dp"
+                android:layout_marginEnd="54dp"
+                android:layout_marginRight="54dp"
+                android:layout_marginBottom="44dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:backgroundTint="#00FFFFFF"
+                app:layout_constraintBottom_toTopOf="@+id/buttonSync"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_logout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
@@ -34,12 +40,14 @@ import java.net.URL;
 public class MainActivity2 extends AppCompatActivity {
 
     Button vjecbutton, vjimbutton, buttonSync;
+    FloatingActionButton logout;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
     int ADMIN;
     ActionBarDrawerToggle toggle;
     String JSONString;
+    String JSONString_intercomm;
 
     @Override
     public void onBackPressed() {
@@ -54,7 +62,18 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         ADMIN = getIntent().getIntExtra("ADMIN", 0);
-
+        logout = (FloatingActionButton) findViewById(R.id.logout);
+        if(ADMIN == 0){
+            logout.setVisibility(View.GONE);
+        }
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ADMIN=0;
+                logout.setVisibility(View.GONE);
+                Toast.makeText(MainActivity2.this, "Logged Out Successfully", Toast.LENGTH_SHORT).show();
+            }
+        });
         //......................HOOKS.......................
 
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -141,17 +160,105 @@ public class MainActivity2 extends AppCompatActivity {
                     dbHelper.onUpgrade(database, 1, 1);
                     dbHelper.close();
                     Toast.makeText(MainActivity2.this, "Please wait...SYNCING", Toast.LENGTH_SHORT).show();
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    new backgroundTask().execute();
-                    try {
-                        Thread.sleep(3000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    //new backgroundTask().execute();
+                    //new backgroundTask_intercom().execute();
+                    StringRequest stringRequest = new StringRequest(Request.Method.GET, DBsync.SERVER_URL_GET,
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+
+
+                                    try {
+                                        String j_url;
+                                        JSONArray jarray;
+                                        JSONObject jsonObject;
+                                        jsonObject = new JSONObject(response);
+                                        jarray = jsonObject.getJSONArray("server_response");
+                                        int count = 0;
+                                        String name, post, email, department;
+                                        Long number;
+                                        if(jarray.isNull(0)){
+                                            Toast.makeText(MainActivity2.this, "Server Down", Toast.LENGTH_SHORT).show();
+                                            return;
+                                        }
+                                        else{
+                                            while (count < jarray.length()) {
+                                                JSONObject jo = jarray.getJSONObject(count);
+                                                name = jo.getString("Name");
+                                                post = jo.getString("Post");
+                                                number = Long.parseLong(jo.getString("Number"));
+                                                email = jo.getString("Email");
+                                                department = jo.getString("Department");
+
+                                                saveToLocalDatabase(name, post, number, email, department, DBsync.SYNC_STATUS_OK);
+                                                count = count + 1;
+
+
+                                            }}
+
+
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    //displaying the error in toast if occurrs
+                                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                    StringRequest stringRequest_intercomm = new StringRequest(Request.Method.GET, DBsync.SERVER_URL_GET_INTERCOM,
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+
+
+                                    try {
+                                        String j_url_intercomm;
+                                        JSONArray jarray_intercomm;
+                                        JSONObject jsonObject_intercomm;
+                                        jsonObject_intercomm = new JSONObject(response);
+                                        jarray_intercomm = jsonObject_intercomm.getJSONArray("server_response");
+                                        int count = 0;
+                                        String name, post, department;
+                                        Long int_comm;
+                                        if(jarray_intercomm.isNull(0)){
+                                            Toast.makeText(MainActivity2.this, "Server Down", Toast.LENGTH_SHORT).show();
+                                            return;
+                                        }
+                                        else{
+                                            while (count < jarray_intercomm.length()) {
+                                                JSONObject jo = jarray_intercomm.getJSONObject(count);
+                                                name = jo.getString("Name");
+                                                post = jo.getString("Post");
+                                                int_comm = Long.parseLong(jo.getString("Int_comm"));
+                                                department = jo.getString("Department");
+
+                                                saveToLocalDatabase_intercom(name, post, int_comm, department);
+                                                count = count + 1;
+
+
+                                            }}
+
+
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    //displaying the error in toast if occurrs
+                                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                    MySingleton.getInstance(getApplicationContext()).adddtoRequestQueue(stringRequest);
+                    MySingleton.getInstance(getApplicationContext()).adddtoRequestQueue(stringRequest_intercomm);
                     Toast.makeText(MainActivity2.this, "Sync Succesful", Toast.LENGTH_SHORT).show();
                 }
 
@@ -210,6 +317,11 @@ public class MainActivity2 extends AppCompatActivity {
                 int count = 0;
                 String name, post, email, department;
                 Long number;
+                if(jarray.isNull(0)){
+                    Toast.makeText(MainActivity2.this, "Server Down", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else{
                 while (count < jarray.length()) {
                     JSONObject jo = jarray.getJSONObject(count);
                     name = jo.getString("Name");
@@ -222,7 +334,7 @@ public class MainActivity2 extends AppCompatActivity {
                     count = count + 1;
 
 
-                }
+                }}
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -230,10 +342,92 @@ public class MainActivity2 extends AppCompatActivity {
 
     }
 
-    public void saveToLocalDatabase(String name,String post,Long number,String email,String department,int sync_status){
+    class backgroundTask_intercom extends AsyncTask<Void, Void, String> {
+        String j_url_intercomm;
+        JSONArray jarray_intercomm;
+        JSONObject jsonObject_intercomm;
+
+
+        @Override
+        protected void onPreExecute() {
+            j_url_intercomm = DBsync.SERVER_URL_GET_INTERCOM;
+
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            try {
+                URL url = new URL(j_url_intercomm);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                StringBuilder stringBuilder = new StringBuilder();
+                while ((JSONString = bufferedReader.readLine()) != null) {
+
+                    stringBuilder.append(JSONString_intercomm + "\n");
+                    Log.i("final", "doInBackground: neverbuilt");
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return stringBuilder.toString();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            try {
+                Log.i("data", "saveToLocalDatabase_intercom: hiii");
+                jsonObject_intercomm = new JSONObject(result);
+                jarray_intercomm = jsonObject_intercomm.getJSONArray("server_response");
+                int count = 0;
+                String name, post, department;
+                Long int_comm;
+                if(jarray_intercomm.isNull(0)){
+                    Toast.makeText(MainActivity2.this, "Server Down", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else{
+                    while (count < jarray_intercomm.length()) {
+                        JSONObject jo = jarray_intercomm.getJSONObject(count);
+                        name = jo.getString("Name");
+                        post = jo.getString("Post");
+                        int_comm = Long.parseLong(jo.getString("Int_comm"));
+                        department = jo.getString("Department");
+
+                        saveToLocalDatabase_intercom(name, post, int_comm, department);
+                        count = count + 1;
+
+
+                    }}
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    public void saveToLocalDatabase(String name,String post,Long number,String email,String department,int status){
         DBHelper dbHelper = new DBHelper(this);
         SQLiteDatabase database = dbHelper.getWritableDatabase();
-        dbHelper.saveToLocalDatabase(name,post,number,email,department,sync_status,database);
+        dbHelper.saveToLocalDatabase(name,post,number,email,department,status,database);
+        dbHelper.close();
+    }
+
+    public void saveToLocalDatabase_intercom(String name,String post,Long int_comm,String department){
+        DBHelper dbHelper = new DBHelper(this);
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        dbHelper.saveToLocalDatabase_intercomm(name,post,int_comm,department,database);
         dbHelper.close();
     }
 

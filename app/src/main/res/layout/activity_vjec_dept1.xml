@@ -20,7 +20,7 @@
                 android:id="@+id/imageView"
                 android:layout_width="360dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/rectvectorvjec1" />
+                app:srcCompat="@drawable/rectvectorvjec1" />
 
             <Button
                 android:id="@+id/CSEButton"

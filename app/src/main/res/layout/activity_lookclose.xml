@@ -3,62 +3,74 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/colour">
-    <EditText
+    <TextView
         android:layout_width="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:fontFamily="@font/montserrat"
         android:hint="Enter Name"
-        android:id="@+id/updateView1" />
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:id="@+id/lookView1" />
 
-    <EditText
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/montserrat"
         android:layout_marginRight="10dp"
+        android:textSize="20sp"
         android:hint="Enter Post"
-        android:id="@+id/updatetView2" />
+        android:id="@+id/lookView2" />
 
-    <EditText
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
+        android:layout_marginStart="25dp"
+        android:fontFamily="@font/montserrat"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
         android:layout_marginRight="10dp"
         android:hint="Enter Number"
-        android:id="@+id/updateView3" />
+        android:id="@+id/lookView3" />
 
-    <EditText
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
+        android:layout_marginStart="25dp"
+        android:fontFamily="@font/montserrat"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
+        android:textSize="20sp"
         android:hint="Enter Email"
-        android:id="@+id/updateView4" />
-    <EditText
+        android:id="@+id/lookView4" />
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:fontFamily="@font/montserrat"
         android:layout_marginRight="10dp"
         android:hint="Enter Department"
-        android:id="@+id/updateView5" />
+        android:id="@+id/lookView5" />
 
-    <LinearLayout
+    <Button
+        android:id="@+id/editCurrent"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/update"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Update" />
-        <Button
-            android:id="@+id/delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Delete" />
-    </LinearLayout>
+        android:layout_marginLeft="10dp"
+        android:text="EDIT" />
 
 
 
