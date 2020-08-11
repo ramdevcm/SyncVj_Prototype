@@ -23,19 +23,25 @@
     <string name="administration">ADMINISTRATION</string>
     <string name="general_facilities">GENERAL FACILITIES</string>
     <string name="useful_links">USEFUL LINKS</string>
-    <string name="staff">STAFF</string>
-    <string name="intercom">INTERCOM</string>
     <string name="username">Username</string>
     <string name="header">header</string>
     <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="todo">TODO</string>
-    <string name="email">Email</string>
+    <string name="add">ADD</string>
+    <string name="edit">EDIT</string>
+    <string name="admin_view">Admin View</string>
+    <string name="user_view">User View</string>
     <string name="number">Number</string>
+    <string name="email">Email</string>
     <string name="name">Name</string>
     <string name="post">Post</string>
     <string name="intercom_number">Intercom Number</string>
     <string name="department">Department</string>
-    <string name="add">ADD</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="staff">STAFF</string>
+    <string name="intercom">INTERCOM</string>
+    <string name="add_new">ADD NEW</string>
 
 </resources>
